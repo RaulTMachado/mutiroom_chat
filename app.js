@@ -24,4 +24,8 @@ io.on('connection', (socket) => {
     socket.on('msgParaServidor', (data) => {
         socket.emit('msgParaCliente', { apelido: data.apelido, mensagem: data.mensagem });
     });
+
+    socket.on('msgParaServidor', (data) => {
+        socket.broadcast
+    });
 });
