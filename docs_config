@@ -1,0 +1,5 @@
+Para esse projeto, estou usando NodeJS, Express, Express-validator, Body-parser como middleware e EJS como engine de views.
+
+Na pasta config, temos arquivos de configuração.
+Na pasta app, temos as pastas que organizam a arquitetura MVC.
+Na pasta app/public, temos os assets.
