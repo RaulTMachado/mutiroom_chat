@@ -1,15 +1,14 @@
-/* importar as configurações do servidor */
+/* get server config */
 
 let app = require('./config/server');
 
-/* parametrizar a porta de escuta */
+/* choose my port */
 
 let server = app.listen(80, () => {});
 
 let io = require('socket.io').listen(server); //on port 80, http and websocket requisitions will be received and treated
 
-app.set('io', io); //criando a variavel io, atribuindo a instancia do meu socket.io para ela e tornando ela global
-//assim eu consigo recuperar o io em controllers, rotas e etc etc etc
+app.set('io', io); //createing global var io so i can get on my routes, controllers and etc
 
 //server response http and tcp (websocket) on the same port
 
@@ -23,9 +22,14 @@ io.on('connection', (socket) => {
 
     socket.on('msgParaServidor', (data) => {
         socket.emit('msgParaCliente', { apelido: data.apelido, mensagem: data.mensagem });
+        socket.broadcast.emit('msgParaCliente', { apelido: data.apelido, mensagem: data.mensagem });
+        console.log(data);
+        //list of users
+        if(parseInt(data.apelido_atualizado_dos_clientes) == 0){
+            socket.emit('participantesParaCliente', { apelido: data.apelido });
+            socket.broadcast.emit('participantesParaCliente', { apelido: data.apelido });
+        }
     });
 
-    socket.on('msgParaServidor', (data) => {
-        socket.broadcast
-    });
+    
 });

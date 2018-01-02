@@ -20,5 +20,5 @@ module.exports.iniciaChat = (application, req, res) => {
                           isLogin: true
                          }); //recupero o objeto io do application definido no app.js e emito um msgParaCliente
 
-    res.render('chat');
+    res.render('chat', { dadosForm });
 }
